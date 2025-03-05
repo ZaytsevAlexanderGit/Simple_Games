@@ -1,9 +1,7 @@
-import { createBrowserRouter } from 'react-router';
-// import { createHashRouter } from 'react-router';
+import { createHashRouter } from 'react-router';
 
 import { Routes } from '../../shared/router';
 import {
-  // ContactsPage,
   Layout,
   GameChoose,
   TTTPage,
@@ -11,8 +9,7 @@ import {
   RPSPage,
 } from '../../pages';
 
-// export const router = createHashRouter([
-export const router = createBrowserRouter([
+export const router = createHashRouter([
   {
     path: Routes.ROOT,
     element: <Layout />,
