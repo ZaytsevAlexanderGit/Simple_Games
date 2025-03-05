@@ -18,7 +18,7 @@ Pet-проект. Цель, получить практику в создани�
 
 ## Установка
 
-1. Склонировать [репозиторий фронтенда](https://github.com/ZaytsevAlexanderGit/Weather-Checker.git)
+1. Склонировать [репозиторий фронтенда](https://github.com/ZaytsevAlexanderGit/Simple_Games.git)
    ```shell
    git clone git@github.com/ZaytsevAlexanderGit/Simple_Games.git
    ```
