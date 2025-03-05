@@ -1,13 +1,14 @@
 import { motion } from 'motion/react';
-import { gameState } from '../assets/stores/state.ts';
+import { RPSState } from '../../assets/stores/state.ts';
 
-export function TextData() {
-  const comment = gameState((state) => state.comment);
-  const touched = gameState((state) => state.touched);
+export function RPSTextData() {
+  const comment = RPSState((state) => state.RPSComment);
+  const touched = RPSState((state) => state.touched);
 
   return (
     <motion.p
       style={{
+        margin: '0',
         outline: '1px dashed black',
         color: 'black',
         backgroundColor: 'rgb(197, 232, 252)',

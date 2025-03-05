@@ -1,39 +1,43 @@
 import Button from '@mui/material/Button';
 import { ButtonGroup } from '@mui/material';
-import { GamePosib, gameState } from '../assets/stores/state.ts';
+import { RPSState } from '../../assets/stores/state.ts';
+import { RPSGamePosib } from '../../assets/stores/rps-data/state.ts';
 
 interface IGameData {
-  playerState: GamePosib;
-  computerState: GamePosib;
+  playerState: RPSGamePosib;
+  computerState: RPSGamePosib;
   touched: boolean;
 }
 
-export const GameButtonGroup = () => {
+export const RPSGameButtonGroup = () => {
   const buttonOutlineProps = {
+    inlineSize: '15vi',
     ':focus': {
       outline: '1px black solid',
       zIndex: 1,
+      transform: 'scale(1.05)',
     },
     ':focus-visible': {
       outline: '1px black solid',
       zIndex: 1,
+      transform: 'scale(1.05)',
     },
   };
 
-  const setPlayerState = gameState((state) => state.setPlayerData);
-  const setComputerState = gameState((state) => state.setComputerData);
+  const setPlayerState = RPSState((state) => state.setRPSPlayerData);
+  const setComputerState = RPSState((state) => state.setRPSComputerData);
 
-  const increaseTouched = gameState((state) => state.increaseTouched);
+  const increaseTouched = RPSState((state) => state.increaseRPSTouched);
 
-  const increasePlayerScore = gameState((state) => state.increasePlayerScore);
-  const increaseComputerScore = gameState(
-    (state) => state.increaseComputerScore
+  const increasePlayerScore = RPSState((state) => state.increaseRPSPlayerScore);
+  const increaseComputerScore = RPSState(
+    (state) => state.increaseRPSComputerScore
   );
   const allData = ['✂️ Scissors', '📜 Paper', '🗿 Rock'];
 
-  const randomComputerState = (): GamePosib => {
+  const randomComputerState = (): RPSGamePosib => {
     const r = Math.floor(Math.random() * 3);
-    return allData[r].split(' ')[1] as GamePosib;
+    return allData[r].split(' ')[1] as RPSGamePosib;
   };
 
   const whoWins = ({
@@ -42,8 +46,8 @@ export const GameButtonGroup = () => {
     touched,
   }: IGameData): string => {
     const amount = 1;
-    playerState = playerState.toLowerCase() as GamePosib;
-    computerState = computerState.toLowerCase() as GamePosib;
+    playerState = playerState.toLowerCase() as RPSGamePosib;
+    computerState = computerState.toLowerCase() as RPSGamePosib;
 
     if (playerState === computerState && touched) {
       return 'Draw. Try More!';
@@ -60,7 +64,7 @@ export const GameButtonGroup = () => {
       return 'Computer Win!';
     }
   };
-  const setComment = gameState((state) => state.setComment);
+  const setComment = RPSState((state) => state.setRPSComment);
 
   return (
     <ButtonGroup
@@ -75,7 +79,7 @@ export const GameButtonGroup = () => {
           sx={buttonOutlineProps}
           onClick={() => {
             increaseTouched();
-            const elem = element.split(' ')[1].toLowerCase() as GamePosib;
+            const elem = element.split(' ')[1].toLowerCase() as RPSGamePosib;
             setPlayerState(elem);
             const comp = randomComputerState();
             setComputerState(comp);

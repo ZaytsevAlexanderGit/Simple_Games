@@ -1,7 +1,7 @@
 import { Grid2 } from '@mui/material';
 import { PlayerZone } from './PlayerZone.tsx';
 
-export const GamingZone = () => {
+export const RPSGamingZone = () => {
   return (
     <Grid2 container direction="row" spacing={4}>
       <PlayerZone player={'player'} />

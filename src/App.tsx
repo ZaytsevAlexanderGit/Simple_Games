@@ -1,8 +1,8 @@
 import './App.css';
-import { MainPage } from './pages/MainPage.tsx';
+import { AppRoutes } from '../src/assets/routing';
 
 function App() {
-  return <MainPage />;
+  return <AppRoutes />;
 }
 
 export default App;

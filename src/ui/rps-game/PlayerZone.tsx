@@ -1,5 +1,5 @@
 import { motion } from 'motion/react';
-import { gameState } from '../assets/stores/state.ts';
+import { RPSState } from '../../assets/stores/state.ts';
 import { Box } from '@mui/material';
 
 interface IPlayerZone {
@@ -7,11 +7,11 @@ interface IPlayerZone {
 }
 
 export function PlayerZone({ player }: IPlayerZone) {
-  const playerState = gameState((state) => state.player);
-  const computerState = gameState((state) => state.computer);
-  const playerScore = gameState((state) => state.playerScore);
-  const computerScore = gameState((state) => state.computerScore);
-  const touched = gameState((state) => state.touched);
+  const playerState = RPSState((state) => state.RPSPlayer);
+  const computerState = RPSState((state) => state.RPSComputer);
+  const playerScore = RPSState((state) => state.RPSPlayerScore);
+  const computerScore = RPSState((state) => state.RPSComputerScore);
+  const touched = RPSState((state) => state.touched);
 
   const cardVis = {
     borderRadius: '8px',
@@ -35,7 +35,10 @@ export function PlayerZone({ player }: IPlayerZone) {
             initial={{ opacity: 0, scale: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <img width={100} src={`./src/assets/imgs/${playerState}.png`} />
+            <img
+              width={100}
+              src={`./src/assets/imgs/rps-game/${playerState}.png`}
+            />
           </motion.div>
           <p>Player Score: {playerScore}</p>
         </Box>
@@ -47,7 +50,10 @@ export function PlayerZone({ player }: IPlayerZone) {
             initial={{ opacity: 0, scale: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <img width={100} src={`./src/assets/imgs/${computerState}.png`} />
+            <img
+              width={100}
+              src={`./src/assets/imgs/rps-game/${computerState}.png`}
+            />
           </motion.div>
           <p>Computer Score: {computerScore}</p>
         </Box>
