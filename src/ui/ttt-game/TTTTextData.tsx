@@ -1,77 +1,86 @@
 import { motion } from 'motion/react';
 import { TTTState } from '../../assets/stores/state.ts';
-import { Grid2, Typography } from '@mui/material';
+import { Grid2, Typography, useMediaQuery } from '@mui/material';
 import Button from '@mui/material/Button';
 
 export function TTTTextData() {
   const comment = TTTState((state) => state.TTTComment);
 
   const resetArea = TTTState((state) => state.resetTTTArea);
-  const resetTouched = TTTState((state) => state.resetTouched);
-  const resetPlayer = TTTState((state) => state.resetPlayer);
-  const setIsNotEnded = TTTState((state) => state.setIsNotEnded);
-  const setTTTComment = TTTState((state) => state.setTTTComment);
-  const setTTTWinCoomb = TTTState((state) => state.setTTTWinCoomb);
+  const resetTTTGameState = TTTState((state) => state.resetTTTGameState);
+
+  const matches = useMediaQuery('(min-width:650px)');
 
   return (
-    <Grid2 container direction="row" spacing={2}>
-      <motion.p
+    <Grid2
+      container
+      spacing={2}
+      sx={{
+        display: 'flex',
+        flexDirection: matches ? 'row' : 'column',
+      }}
+    >
+      <div
         style={{
           margin: '0',
           color: 'black',
-          outline: '1px dashed black',
-          backgroundColor: 'rgb(197, 232, 252)',
+          outline: '1px solid black',
+          border: '1px solid black',
+          backgroundColor: 'white',
           borderRadius: '8px',
-          // height: '10vh',
+          height: matches ? '10vh' : '6vh',
           padding: '0.25rem',
           textAlign: 'center',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          width: '50vi',
-          fontSize: '1.5rem',
+          width: matches ? '30vi' : '50vi',
+          fontSize: matches ? '1.5rem' : '1.25rem',
         }}
-        key={comment}
-        animate={{ opacity: 1 }}
-        initial={{ opacity: 0 }}
-        transition={{ duration: 0.5 }}
       >
-        {comment}
-      </motion.p>
+        <motion.p
+          key={comment}
+          animate={{ opacity: 1, scale: 1 }}
+          initial={{ opacity: 0, scale: 0 }}
+          transition={{ duration: 0.5 }}
+          style={{
+            textAlign: 'center',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          {comment}
+        </motion.p>
+      </div>
       <>
         <Button
+          disableRipple
           sx={{
             border: '1px solid black',
             boxShadow: '1px 1px 1px black',
+            backgroundColor: 'white',
             ':hover': {
-              backgroundColor: 'transparent',
+              boxShadow: '2px 2px 3px black',
               border: '1px solid black',
             },
             ':active': {
               outline: 'none',
               boxShadow: 'none',
-              backgroundColor: 'transparent',
             },
             ':focus': {
               outline: 'none',
-
-              backgroundColor: 'transparent',
             },
             ':focus-visible': {
               outline: 'none',
-              backgroundColor: 'transparent',
             },
           }}
           onClick={() => {
+            resetTTTGameState();
             resetArea();
-            resetTouched();
-            resetPlayer();
-            setIsNotEnded(true);
-            setTTTComment("Player's 1 turn ❌");
-            setTTTWinCoomb([[-1, -1]]);
           }}
         >
-          <Typography component={'p'} color="info" align="center">
+          <Typography component={'p'} color="black" align="center">
             Restart
           </Typography>
         </Button>

@@ -1,5 +1,3 @@
-// import styles from './styles.module.css';
-
 import { ButtonGroup, Typography } from '@mui/material';
 import Button from '@mui/material/Button';
 import { Routes } from '../../shared/router.ts';
@@ -32,8 +30,22 @@ export function GameChoose() {
   };
 
   return (
-    <>
-      <Typography variant="h4" color="info" align="center">
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '10vh' }}>
+      <Typography
+        variant="h4"
+        color="info"
+        align="center"
+        bgcolor=""
+        sx={{
+          padding: '15px',
+          borderRadius: '10px',
+          bgcolor: 'azure',
+          boxShadow: '0px 0px 0px 2px white',
+          border: '1px solid black',
+          outline: '1px solid black',
+          outlineOffset: '1px',
+        }}
+      >
         Chose a Game to Play
       </Typography>
       <br />
@@ -59,6 +71,6 @@ export function GameChoose() {
           </Button>
         ))}
       </ButtonGroup>
-    </>
+    </div>
   );
 }

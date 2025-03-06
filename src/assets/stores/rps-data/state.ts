@@ -2,6 +2,15 @@ import { StateCreator } from 'zustand/index';
 
 export type RPSGamePosib = 'none' | 'scissors' | 'rock' | 'paper';
 
+const defaultRPSState: RPSGameState = {
+  touched: 0,
+  RPSPlayer: 'none',
+  RPSComputer: 'none',
+  RPSPlayerScore: 0,
+  RPSComputerScore: 0,
+  RPSComment: 'Choose your Hero.',
+};
+
 export interface RPSGameState {
   touched: number;
   RPSPlayer: RPSGamePosib;
@@ -18,6 +27,7 @@ export interface RPSGameAction {
   increaseRPSPlayerScore: (amount: number) => void;
   increaseRPSComputerScore: (amount: number) => void;
   setRPSComment: (comment: string) => void;
+  resetRPSState: () => void;
 }
 
 export const createRPSSlice: StateCreator<
@@ -26,12 +36,12 @@ export const createRPSSlice: StateCreator<
   [],
   RPSGameState & RPSGameAction
 > = (set) => ({
-  touched: 0,
-  RPSPlayer: 'none',
-  RPSComputer: 'none',
-  RPSPlayerScore: 0,
-  RPSComputerScore: 0,
-  RPSComment: 'Choose your Hero.',
+  touched: defaultRPSState.touched,
+  RPSPlayer: defaultRPSState.RPSPlayer,
+  RPSComputer: defaultRPSState.RPSComputer,
+  RPSPlayerScore: defaultRPSState.RPSPlayerScore,
+  RPSComputerScore: defaultRPSState.RPSComputerScore,
+  RPSComment: defaultRPSState.RPSComment,
   setRPSPlayerData: (figure: RPSGamePosib) => set({ RPSPlayer: figure }),
   setRPSComputerData: (figure: RPSGamePosib) => set({ RPSComputer: figure }),
   increaseRPSTouched: () => set((state) => ({ touched: state.touched + 1 })),
@@ -40,4 +50,13 @@ export const createRPSSlice: StateCreator<
   increaseRPSComputerScore: (amount: number) =>
     set((state) => ({ RPSComputerScore: state.RPSComputerScore + amount })),
   setRPSComment: (comment: string) => set({ RPSComment: comment }),
+  resetRPSState: () =>
+    set(() => ({
+      touched: defaultRPSState.touched,
+      RPSPlayer: defaultRPSState.RPSPlayer,
+      RPSComputer: defaultRPSState.RPSComputer,
+      RPSPlayerScore: defaultRPSState.RPSPlayerScore,
+      RPSComputerScore: defaultRPSState.RPSComputerScore,
+      RPSComment: defaultRPSState.RPSComment,
+    })),
 });

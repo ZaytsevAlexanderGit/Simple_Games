@@ -1,5 +1,5 @@
 import Button from '@mui/material/Button';
-import { ButtonGroup } from '@mui/material';
+import { ButtonGroup, useMediaQuery } from '@mui/material';
 import { RPSState } from '../../assets/stores/state.ts';
 import { RPSGamePosib } from '../../assets/stores/rps-data/state.ts';
 
@@ -10,8 +10,11 @@ interface IGameData {
 }
 
 export const RPSGameButtonGroup = () => {
+  const matches = useMediaQuery('(min-width:575px)');
+
   const buttonOutlineProps = {
-    inlineSize: '15vi',
+    inlineSize: matches ? '17.5vi' : '20vi',
+    fontSize: matches ? '1rem' : '0.75rem',
     ':focus': {
       outline: '1px black solid',
       zIndex: 1,
@@ -37,7 +40,7 @@ export const RPSGameButtonGroup = () => {
 
   const randomComputerState = (): RPSGamePosib => {
     const r = Math.floor(Math.random() * 3);
-    return allData[r].split(' ')[1] as RPSGamePosib;
+    return allData[r].split(' ')[1].toLowerCase() as RPSGamePosib;
   };
 
   const whoWins = ({

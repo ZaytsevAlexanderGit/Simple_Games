@@ -60,7 +60,6 @@ export const TTTAreaCell = ({ elem, rowIndex, elemIndex }: IAreaCell) => {
       }}
       onClick={() => {
         if (TTTArea[rowIndex][elemIndex] === 'none' && isNotEnded) {
-          console.log(TTTArea.length);
           setCellData({
             col: elemIndex,
             row: rowIndex,
@@ -77,7 +76,7 @@ export const TTTAreaCell = ({ elem, rowIndex, elemIndex }: IAreaCell) => {
             setTTTWinCoomb(quickCheck[2]);
           } else {
             if (touched === TTTArea.length * TTTArea.length - 1)
-              setComment(`Draw. Try One More Time.`);
+              setComment(`Draw! Try More!`);
             else
               setComment(
                 `Player's ${((touched + 1) % 2) + 1} turn ${touched % 2 === 0 ? '⭕' : '❌'}`
@@ -88,7 +87,7 @@ export const TTTAreaCell = ({ elem, rowIndex, elemIndex }: IAreaCell) => {
     >
       <Box
         sx={{
-          inlineSize: `clamp(30px, calc(40vi / ${TTTArea.length}), 50px)`,
+          inlineSize: `clamp(30px, calc(45vi / ${TTTArea.length}), 50px)`,
           aspectRatio: 1 / 1,
           display: 'flex',
           justifyContent: 'center',
@@ -98,9 +97,9 @@ export const TTTAreaCell = ({ elem, rowIndex, elemIndex }: IAreaCell) => {
         {elem !== 'none' ? (
           <img
             style={{
-              width: `clamp(30px, calc(40vi / ${TTTArea.length}), 40px)`,
+              width: `clamp(30px, calc(45vi / ${TTTArea.length}), 45px)`,
             }}
-            src={`./src/assets/imgs/ttt-game/${elem}.png`}
+            src={`./${elem}.png`}
             alt={elem}
           />
         ) : (

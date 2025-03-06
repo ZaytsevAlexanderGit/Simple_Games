@@ -1,6 +1,6 @@
 import { motion } from 'motion/react';
 import { RPSState } from '../../assets/stores/state.ts';
-import { Box } from '@mui/material';
+import { Box, useMediaQuery } from '@mui/material';
 
 interface IPlayerZone {
   player: 'player' | 'computer';
@@ -13,16 +13,19 @@ export function PlayerZone({ player }: IPlayerZone) {
   const computerScore = RPSState((state) => state.RPSComputerScore);
   const touched = RPSState((state) => state.touched);
 
+  const matches = useMediaQuery('(min-width:575px)');
+
   const cardVis = {
     borderRadius: '8px',
     height: '30vh',
-    width: '30vi',
+    inlineSize: matches ? '22.5vi' : '30vi',
     bgcolor: 'black',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'column',
     paddingTop: '1rem',
+    fontSize: matches ? '0.95rem' : '0.75rem',
   };
 
   return (
@@ -35,10 +38,7 @@ export function PlayerZone({ player }: IPlayerZone) {
             initial={{ opacity: 0, scale: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <img
-              width={100}
-              src={`./src/assets/imgs/rps-game/${playerState}.png`}
-            />
+            <img width={100} src={`./${playerState}.png`} alt={playerState} />
           </motion.div>
           <p>Player Score: {playerScore}</p>
         </Box>
@@ -52,7 +52,8 @@ export function PlayerZone({ player }: IPlayerZone) {
           >
             <img
               width={100}
-              src={`./src/assets/imgs/rps-game/${computerState}.png`}
+              src={`./${computerState}.png`}
+              alt={computerState}
             />
           </motion.div>
           <p>Computer Score: {computerScore}</p>

@@ -12,5 +12,5 @@ export default defineConfig({
   },
   publicDir: 'src/assets/imgs',
   plugins: [react()],
-  base: '/Games/',
+  base: '/Simple_Games/',
 });

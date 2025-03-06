@@ -1,12 +1,27 @@
-import { Grid2 } from '@mui/material';
+import { Grid2, useMediaQuery } from '@mui/material';
 import { RPSGameButtonGroup } from '../../ui/rps-game/RPSGameButtonGroup.tsx';
 import { RPSGamingZone } from '../../ui/rps-game/RPSGamingZone.tsx';
 import { RPSTextData } from '../../ui/rps-game/RPSTextData.tsx';
 import { BackButton } from '../../ui/shared/BackButton.tsx';
+import { useEffect } from 'react';
+import { RPSState } from '../../assets/stores/state.ts';
 
 export function RPSPage() {
+  const resetRPSState = RPSState((state) => state.resetRPSState);
+  const matches = useMediaQuery('(min-width:575px)');
+
+  useEffect(() => {
+    resetRPSState();
+  }, []);
+
   return (
-    <>
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+    >
       <BackButton />
       <Grid2
         container
@@ -17,7 +32,7 @@ export function RPSPage() {
           gap: 1,
           height: '80vh',
           padding: '1rem',
-          // width: '70vi',
+          width: matches ? '60vi' : 'auto',
           justifyContent: 'space-around',
           alignItems: 'center',
           borderRadius: '16px',
@@ -27,6 +42,6 @@ export function RPSPage() {
         <RPSTextData />
         <RPSGameButtonGroup />
       </Grid2>
-    </>
+    </div>
   );
 }

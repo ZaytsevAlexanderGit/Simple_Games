@@ -7,8 +7,7 @@ export function BackButton() {
   const buttonOutlineProps = {
     position: 'absolute',
     top: '-8vh',
-    right: '45%',
-    inlineSize: '10%',
+    margin: '0 auto',
     display: 'flex',
     justifyContent: 'center',
     ':hover': {
