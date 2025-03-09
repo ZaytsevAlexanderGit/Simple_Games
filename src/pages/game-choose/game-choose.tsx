@@ -15,8 +15,8 @@ import { TTTState } from '../../assets/stores/state.ts';
 
 export function GameChoose() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [size, setSize] = useState<number>(5);
-  const [winCond, setWinCond] = useState<number>(4);
+  const [size, setSize] = useState<number | string>(5);
+  const [winCond, setWinCond] = useState<number | string>(4);
   const [error, setError] = useState<string>('');
 
   const setStateAreaSize = TTTState((state) => state.setAreaSize);
@@ -116,7 +116,6 @@ export function GameChoose() {
             top: '50%',
             left: '50%',
             transform: 'translate(-50%, -50%)',
-            width: '50vi',
             bgcolor: 'white',
             color: 'black',
             border: '2px solid #000',
@@ -133,22 +132,26 @@ export function GameChoose() {
               display: 'flex',
               flexDirection: 'row',
               gap: '5vh',
-              inlineSize: '50vi',
               textAlign: 'center',
             }}
           >
             <Grid2 sx={{ display: 'flex', flexDirection: 'column' }}>
               <Input
+                autoFocus
                 id="area-size"
                 aria-describedby="area-size"
+                inputProps={{ style: { textAlign: 'center' } }}
                 value={size}
                 sx={{
                   fontSize: 'inherit',
                 }}
                 onChange={(event: ChangeEvent<HTMLInputElement>) => {
                   if (error.length > 0) setError('');
-                  if (onlyNumbers(event.target.value))
-                    setSize(+event.target.value);
+                  if (onlyNumbers(event.target.value)) {
+                    if (event.target.value.length === 0) {
+                      setSize(event.target.value);
+                    } else setSize(+event.target.value);
+                  }
                 }}
               />
               <FormHelperText
@@ -171,15 +174,18 @@ export function GameChoose() {
               <Input
                 sx={{
                   fontSize: 'inherit',
-                  textAlign: 'inherit',
                 }}
+                inputProps={{ style: { textAlign: 'center' } }}
                 id="win-cond"
                 aria-describedby="win-cond"
                 value={winCond}
                 onChange={(event: ChangeEvent<HTMLInputElement>) => {
-                  if (onlyNumbers(event.target.value))
-                    if (error.length > 0) setError('');
-                  setWinCond(+event.target.value);
+                  if (error.length > 0) setError('');
+                  if (onlyNumbers(event.target.value)) {
+                    if (event.target.value.length === 0) {
+                      setWinCond(event.target.value);
+                    } else setWinCond(+event.target.value);
+                  }
                 }}
               />
               <FormHelperText
@@ -201,14 +207,22 @@ export function GameChoose() {
             type="submit"
             onClick={(e) => {
               e.preventDefault();
-              if (size >= winCond && winCond > 0) {
+              if (
+                typeof winCond !== 'string' &&
+                typeof size !== 'string' &&
+                size >= winCond &&
+                size <= 10 &&
+                winCond > 0
+              ) {
                 setError('');
                 setStateAreaSize(size);
                 setStateWinCond(winCond);
                 handleClose();
                 navigate(Routes.XO);
               } else {
-                setError(`Area Size >=\u00A0Win Condition\u00A0>\u00A00`);
+                setError(
+                  `10\u00A0>=\u00A0Area Size >=\u00A0Win Condition\u00A0>\u00A00`
+                );
               }
             }}
           >
