@@ -1,4 +1,4 @@
-import { Box, TableCell } from '@mui/material';
+import { Box, TableCell, useMediaQuery } from '@mui/material';
 import { TTTGamePosib } from '../../assets/stores/ttt-data/state.ts';
 import { TTTWinCheck } from '../../shared/utils.ts';
 import { TTTState } from '../../assets/stores/state.ts';
@@ -23,6 +23,8 @@ export const TTTAreaCell = ({ elem, rowIndex, elemIndex }: IAreaCell) => {
   const setCellData = TTTState((state) => state.setCellData);
   const switchPlayer = TTTState((state) => state.switchPlayer);
   const setTTTWinCoomb = TTTState((state) => state.setTTTWinCoomb);
+
+  const matches = useMediaQuery('(min-width:650px)');
 
   return (
     <TableCell
@@ -87,7 +89,9 @@ export const TTTAreaCell = ({ elem, rowIndex, elemIndex }: IAreaCell) => {
     >
       <Box
         sx={{
-          inlineSize: `clamp(30px, calc(45vi / ${TTTArea.length}), 50px)`,
+          inlineSize: matches
+            ? `clamp(10px,calc(50vh / ${TTTArea.length}),calc(40vi / ${TTTArea.length}))`
+            : `clamp(10px,calc(70vh / ${TTTArea.length}),calc(55vi / ${TTTArea.length}))`,
           aspectRatio: 1 / 1,
           display: 'flex',
           justifyContent: 'center',
@@ -97,7 +101,9 @@ export const TTTAreaCell = ({ elem, rowIndex, elemIndex }: IAreaCell) => {
         {elem !== 'none' ? (
           <img
             style={{
-              width: `clamp(30px, calc(45vi / ${TTTArea.length}), 45px)`,
+              width: matches
+                ? `clamp(8px,calc(45vh / ${TTTArea.length}),calc(40vi / ${TTTArea.length}))`
+                : `clamp(8px,calc(65vh / ${TTTArea.length}),calc(55vi / ${TTTArea.length}))`,
             }}
             src={`./${elem}.png`}
             alt={elem}

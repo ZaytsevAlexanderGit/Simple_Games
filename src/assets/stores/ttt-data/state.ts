@@ -9,11 +9,14 @@ export type TTTCoordinates = {
   type: TTTGamePosib;
 };
 
-const defaultTTTGameState: TTTGameState = {
+const defaultTTTGameState: Omit<
+  TTTGameState,
+  'TTTAreaSize' | 'TTTWinCondition'
+> = {
   isNotEnded: true,
   touched: 0,
-  TTTAreaSize: 5,
-  TTTWinCondition: 4,
+  // TTTAreaSize: 5,
+  // TTTWinCondition: 4,
   TTTCurPlayer: 'player1',
   TTTArea: [['none']],
   TTTWinCoomb: [[-1, -1]],
@@ -33,6 +36,8 @@ export interface TTTGameState {
 
 export interface TTTGameAction {
   setIsNotEnded: (data: boolean) => void;
+  setAreaSize: (size: number) => void;
+  setWinCond: (num: number) => void;
   increaseTouched: () => void;
   setCellData: ({ col, row, type }: TTTCoordinates) => void;
   switchPlayer: () => void;
@@ -50,12 +55,16 @@ export const createTTTSlice: StateCreator<
 > = (set) => ({
   isNotEnded: defaultTTTGameState.isNotEnded,
   touched: defaultTTTGameState.touched,
-  TTTAreaSize: defaultTTTGameState.TTTAreaSize,
-  TTTWinCondition: defaultTTTGameState.TTTWinCondition,
+  TTTAreaSize: 0,
+  TTTWinCondition: 0,
+  // TTTAreaSize: defaultTTTGameState.TTTAreaSize,
+  // TTTWinCondition: defaultTTTGameState.TTTWinCondition,
   TTTCurPlayer: defaultTTTGameState.TTTCurPlayer,
   TTTArea: defaultTTTGameState.TTTArea,
   TTTWinCoomb: defaultTTTGameState.TTTWinCoomb,
   TTTComment: defaultTTTGameState.TTTComment,
+  setAreaSize: (size: number) => set(() => ({ TTTAreaSize: size })),
+  setWinCond: (num: number) => set(() => ({ TTTWinCondition: num })),
   setIsNotEnded: (data: boolean) => set(() => ({ isNotEnded: data })),
   setCellData: ({ col, row, type }) =>
     set((state) => ({
@@ -78,8 +87,8 @@ export const createTTTSlice: StateCreator<
     set(() => ({
       isNotEnded: defaultTTTGameState.isNotEnded,
       touched: defaultTTTGameState.touched,
-      TTTAreaSize: defaultTTTGameState.TTTAreaSize,
-      TTTWinCondition: defaultTTTGameState.TTTWinCondition,
+      // TTTAreaSize: defaultTTTGameState.TTTAreaSize,
+      // TTTWinCondition: defaultTTTGameState.TTTWinCondition,
       TTTCurPlayer: defaultTTTGameState.TTTCurPlayer,
       TTTArea: defaultTTTGameState.TTTArea,
       TTTWinCoomb: defaultTTTGameState.TTTWinCoomb,

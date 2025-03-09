@@ -7,13 +7,17 @@ export const TTTGamingZone = () => {
   const touched = TTTState((state) => state.touched);
 
   return (
-    <Table>
+    <Table
+      sx={{
+        gap: `clamp(3px,calc(5vi / ${TTTArea.length}),10px)`,
+      }}
+    >
       <TableBody
         key={touched}
         sx={{
           display: 'flex',
           flexDirection: 'column',
-          gap: '10px',
+          gap: `inherit`,
         }}
       >
         {TTTArea.map((rowData, rowIndex) => (
@@ -23,7 +27,7 @@ export const TTTGamingZone = () => {
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              gap: '10px',
+              gap: `inherit`,
             }}
           >
             {rowData.map((elem, elemIndex) => (
