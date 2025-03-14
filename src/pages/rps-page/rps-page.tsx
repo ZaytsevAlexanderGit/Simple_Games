@@ -15,33 +15,36 @@ export function RPSPage() {
   }, []);
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-    >
-      <BackButton />
-      <Grid2
-        container
-        direction="column"
-        spacing={10}
-        sx={{
-          bgcolor: '#cfe8fc',
-          gap: 1,
-          height: '80vh',
-          padding: '1rem',
-          width: matches ? '60vi' : 'auto',
-          justifyContent: 'space-around',
+    <>
+      <title>Rock,Paper,Scissors</title>
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
           alignItems: 'center',
-          borderRadius: '16px',
         }}
       >
-        <RPSGamingZone />
-        <RPSTextData />
-        <RPSGameButtonGroup />
-      </Grid2>
-    </div>
+        <BackButton />
+        <Grid2
+          container
+          direction="column"
+          spacing={10}
+          sx={{
+            bgcolor: '#cfe8fc',
+            gap: 1,
+            height: '80vh',
+            padding: '1rem',
+            width: matches ? '60vi' : 'auto',
+            justifyContent: 'space-around',
+            alignItems: 'center',
+            borderRadius: '16px',
+          }}
+        >
+          <RPSGamingZone />
+          <RPSTextData />
+          <RPSGameButtonGroup />
+        </Grid2>
+      </div>
+    </>
   );
 }
