@@ -1,9 +1,16 @@
 import Button from '@mui/material/Button';
 import { Routes } from '../../shared/router.ts';
-import { useNavigate } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
 import { Typography } from '@mui/material';
+import { TTTState } from '../../assets/stores/state.ts';
 
 export function BackButton() {
+  const location = useLocation();
+  const fromChoose = TTTState((state) => state.fromChoose);
+  const setIsFromChoose = TTTState((state) => state.setIsFromChoose);
+  const setStateAreaSize = TTTState((state) => state.setAreaSize);
+  const setStateWinCond = TTTState((state) => state.setWinCond);
+
   const buttonOutlineProps = {
     position: 'absolute',
     top: '-8vh',
@@ -31,6 +38,9 @@ export function BackButton() {
     <Button
       sx={buttonOutlineProps}
       onClick={() => {
+        if (location.pathname.includes('xo') && fromChoose) setIsFromChoose();
+        setStateAreaSize(0);
+        setStateWinCond(0);
         navigate(Routes.ROOT);
       }}
     >

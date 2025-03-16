@@ -15,8 +15,6 @@ const defaultTTTGameState: Omit<
 > = {
   isNotEnded: true,
   touched: 0,
-  // TTTAreaSize: 5,
-  // TTTWinCondition: 4,
   TTTCurPlayer: 'player1',
   TTTArea: [['none']],
   TTTWinCoomb: [[-1, -1]],
@@ -57,8 +55,6 @@ export const createTTTSlice: StateCreator<
   touched: defaultTTTGameState.touched,
   TTTAreaSize: 0,
   TTTWinCondition: 0,
-  // TTTAreaSize: defaultTTTGameState.TTTAreaSize,
-  // TTTWinCondition: defaultTTTGameState.TTTWinCondition,
   TTTCurPlayer: defaultTTTGameState.TTTCurPlayer,
   TTTArea: defaultTTTGameState.TTTArea,
   TTTWinCoomb: defaultTTTGameState.TTTWinCoomb,
@@ -87,8 +83,6 @@ export const createTTTSlice: StateCreator<
     set(() => ({
       isNotEnded: defaultTTTGameState.isNotEnded,
       touched: defaultTTTGameState.touched,
-      // TTTAreaSize: defaultTTTGameState.TTTAreaSize,
-      // TTTWinCondition: defaultTTTGameState.TTTWinCondition,
       TTTCurPlayer: defaultTTTGameState.TTTCurPlayer,
       TTTArea: defaultTTTGameState.TTTArea,
       TTTWinCoomb: defaultTTTGameState.TTTWinCoomb,

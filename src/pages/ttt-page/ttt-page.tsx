@@ -4,6 +4,7 @@ import { Grid2, useMediaQuery } from '@mui/material';
 import { TTTGamingZone } from '../../ui/ttt-game/TTTGamingZone.tsx';
 import { TTTTextData } from '../../ui/ttt-game/TTTTextData.tsx';
 import { BackButton } from '../../ui/shared/BackButton.tsx';
+import { TTTModalAreaSize } from '../../ui/ttt-game/TTTModalAreaSize.tsx';
 
 export function TTTPage() {
   const resetTTTGameState = TTTState((state) => state.resetTTTGameState);
@@ -11,21 +12,17 @@ export function TTTPage() {
   const matches = useMediaQuery('(min-width:650px)');
 
   const AreaSize = TTTState((state) => state.TTTAreaSize);
-  const WinCond = TTTState((state) => state.TTTWinCondition);
-  const setStateAreaSize = TTTState((state) => state.setAreaSize);
-  const setStateWinCond = TTTState((state) => state.setWinCond);
 
   useEffect(() => {
-    resetTTTGameState();
-    if (AreaSize === 0 || WinCond === 0) {
-      setStateAreaSize(5);
-      setStateWinCond(4);
+    if (AreaSize !== 0) {
+      resetTTTGameState();
+      resetArea();
     }
-    resetArea();
-  }, []);
+  }, [AreaSize]);
 
   return (
     <>
+      {AreaSize === 0 && <TTTModalAreaSize isOpen={true} />}
       <title>Tick-Tack-Toe</title>
       <div
         style={{

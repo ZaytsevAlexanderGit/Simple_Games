@@ -31,13 +31,6 @@ const isWinSequence = (
       }
     }
   }
-
-  // const data = { cross: 0, zero: 0, none: 0 };
-  // for (const elem of arr) data[elem]++;
-  // for (const elem of Object.keys(data)) {
-  //   if (data[elem as TTTGamePosib] >= winCond && elem !== 'none')
-  //     ret = [true, elem as TTTGamePosib];
-  // }
   return ret;
 };
 
@@ -106,3 +99,12 @@ export const TTTWinCheck = (
   }
   return ret;
 };
+
+export function onlyNumbers(s: string) {
+  for (let i = 0; i < s.length; i++) {
+    if (s.charCodeAt(i) < 48 || s.charCodeAt(i) > 57) {
+      return false;
+    }
+  }
+  return true;
+}
